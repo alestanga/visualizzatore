@@ -39,10 +39,10 @@ namespace visualizzatore
                 {
                     string[] files = Directory.GetFiles(percorso, "*.*", SearchOption.AllDirectories).OrderByDescending(d => new FileInfo(d).LastWriteTime).ToArray();
                     foreach (string file in files)
-                    {
-                        if (file.Contains(textRicerca.Text) && textRicerca.Text != "")
-                        {
-                            if (file.EndsWith("jpg") || file.EndsWith("bmp") || file.EndsWith("png"))
+                    {//con ToLower() vengono ignorate maiuscole e minuscole
+                        if (file.ToLower().Contains(textRicerca.Text.ToLower()) && textRicerca.Text != "")
+                        {//le estensioni vanno scritte in minuscolo!
+                            if (file.ToLower().EndsWith("jpg") || file.ToLower().EndsWith("bmp") || file.ToLower().EndsWith("png"))
                             {
                                 trovato = true;
                                 pictureImaggine.Visible = true;
@@ -51,7 +51,7 @@ namespace visualizzatore
                                 dwgbox.Dock = DockStyle.None;
                                 pictureImaggine.ImageLocation = file;
                             }
-                            if (file.EndsWith("dwg") || file.EndsWith("dxf"))
+                            if (file.ToLower().EndsWith("dwg") || file.ToLower().EndsWith("dxf"))
                             {
                                 trovato = true;
                                 pictureImaggine.Visible = false;
